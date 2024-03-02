@@ -1,4 +1,4 @@
-## La aparición de `HTML5/CSS3/JS` ha supuesto el nacimiento del desarrollo front-end moderno. (0.75 puntos)
+## 1. La aparición de `HTML5/CSS3/JS` ha supuesto el nacimiento del desarrollo front-end moderno. (0.75 puntos)
 
 ### ¿Cuál es la ventaja del uso de etiquetas semánticas? Nombra y explica al menos 3 de estas ventajas.
 
@@ -33,3 +33,58 @@ Existen varias opciones para poder controlar los estilos de un elemento según e
 - **Compila a javascript** Typescript no se ejecuta en navegadores, para que pueda ser ejecutado debe ser compilado a Javascript.
 - **Uso de interfaces** Las interfaces definen la estructura de un objeto definiendo propiedades y métodos de este objeto. Su comportamiento es parecido a si creáramos un tipo de dato que luego en la ejecución, typescript puede comprobar para mantener coherencia.
 - **Inferencia de tipos** Typescript es capaz de detectar el tipo de dato de una variable por lo que no sería necesario especificar siempre el tipo de dato.
+
+## 2. El lenguaje CSS es muy rígido, poco práctico y ordenado a la hora de programar. Para evitar este problema se han creado los preprocesadores CSS, que ofrecen evidentes ventajas (0.5 puntos)
+
+### • Cita al menos 2 de estos preprocesadores.
+
+- **SASS**
+- **LESS**
+
+### • Cita al menos 4 ventajas que ofrecen estos preprocesadores.
+
+Hace unos años, los preprocesadores ofrecían algunas características que CSS no disponía y suponían una ventaja con respecto a CSS. En los últimos años muchas de estas características han sido incorporadas a CSS3 y no estoy segura de ver claramente las ventajas de uso de estos procesadores hoy en día. Algunas de las características/ventajas de estos procesadores con respecto a CSS son:
+
+- **Código mejor organizado** Permite la separación del código en varios archivos, mejorando así la organización.
+- **Facilidad de mantenimiento** Permiten una organización modular de los estilos, y esto hace que sea más fácil de mantener y trabajar en el código.
+- **Reutilización del código** Al tener el código dividido y utilizar algunas características como el uso de variables o los mixins, el código resultante es más reutilizable y evita la repetición de estilos.
+- **Características del lenguaje** Estos preprocesadores permitieron el uso de variables, mixins, funciones o anidamiento. Todo ello contribuía a una optimización del código, su legibilidad y mantenimiento.
+
+### • Explica brevemente en qué consisten los sourcemaps.
+
+Al desarrollar una aplicación web es una buena práctica combinar y comprimir el código Javascript y CSS. Esto mejora su rendimiento, pero dificulta su lectura y si se necesita hacer algún cambio, es difícil de leer. Para evitar esta situación está el sourcemap. Al generar el código optimizado, se genera también un sourcemap que contiene la información acerca de la relación entre el código generado y el original y permite a los desarrolladores depurar el código más fácilmente porque mantiene información como los nombres de los archivos fuente, líneas de código correspondientes y las columnas originales.
+
+### • Explica qué es un transpilador.
+
+Es un tipo de compilador que traduce un lenguaje fuente a otro lenguaje fuente. Por ejemplo, puede transpilar de TypeScript a JavaScript o de SASS a CSS para que los navegadores puedan interpretar el lenguaje.
+
+## 3. El flujo de trabajo profesional en front-end hace indispensable el uso de herramientas como controles de versiones y herramientas de gestión de módulos (0.75 puntos).
+
+### • Cita al menos dos sistemas de control de versiones y dos herramientas de gestión de módulos.
+
+- Sistemas de control de versiones:
+  - Git
+  - CVS
+  - Apache Subversion
+  - Mercurial
+- Herramientas de gestión de módulos:
+  - Node.js y npm
+  - Webpack
+  - Parcel
+
+### • Cita y explica al menos 3 comandos de Git.
+
+- **git init** Sirve para crear un nuevo repositorio o reinicializar uno ya existente. Al ejecutar el comando, se creará una carpeta (invisible en mac) .git en el lugar que hayamos apuntado en la terminal.
+- **git status** Muestra el estado actual del _working directory_ y del _staging area_ permitiendo ver si hay archivos modificados en el _working directory_ que puedan añadirse al _staging area_ o si hay archivos en el _staging area_ que puedan ser commiteados.
+- **git add** Con este comando git prepara los archivos con cambios para almacenarlos en el _staging area_
+
+### • Cita y explica brevemente las características más definitorias de WebPack.
+
+Webpack es un empaquetador de módulos (_bundler_), permite generar un archivo único con todos los módulos que necesita la aplicación para funcionar. Las aplicaciones web están compuestas por varios archivos js, css, etc. que al mismo tiempo están interrelacionados entre ellos. Esta herramienta empaqueta, transforma y optimiza los recursos necesarios para su funcionamiento.
+
+Algunas de sus características principales son:
+
+- **Empaquetado de módulos** Puede empaquetar diferentes módulos utilizados por los desarrolladores en paquetes facilitando así la gestión de las dependencias y la organización del código permitiendo un desarrollo modular.
+- **Code splitting** Esta característica permite dividir el código en varios paquetes que se pueden cargar bajo demanda reduciendo así la cantidad de datos que deben descargarse y el tiempo de carga.
+- **Hot module replacement** Permite actualizar automáticamente los cambios en un módulo sin necesidad de recargar la página.
+- **Tree shaking** Elimina el código muerto que no se utiliza reduciendo el tamaño del archivo y mejorando los tiempos de carga.
