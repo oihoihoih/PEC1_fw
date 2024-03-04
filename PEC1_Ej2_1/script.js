@@ -1,5 +1,6 @@
 const form = document.getElementById("form");
 const username = document.getElementById("username");
+const age = document.getElementById("age");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const password2 = document.getElementById("password2");
@@ -26,6 +27,39 @@ function checkEmail(input) {
     showSuccess(input);
   } else {
     showError(input, `Email is not valid`);
+  }
+}
+
+// Check age is valid
+function checkAge(input) {
+  if (input.value < 0 || input.value > 1000) {
+    showError(input, "Age must be between 0 and 1000 years");
+  }
+}
+
+// TODO: Validaciones en tiempo real
+// TODO: Posicionamiento de la frase del password
+// Check password is valid
+function checkPassword(input) {
+  const capitalLetter = /[A-Z]/;
+  const lowerCase = /[a-z]/;
+  const numbers = /\d/;
+  const signs = /[`~!@#$%^&*()_+\-=\{\}\|\[\]\\:";'<>?,./]/;
+
+  if (
+    capitalLetter.test(input.value) &&
+    lowerCase.test(input.value) &&
+    numbers.test(input.value) &&
+    signs.test(input.value)
+  ) {
+    console.log(input.value.test(capitalLetter));
+    showSuccess(input);
+  } else {
+    showError(
+      input,
+      'The password must have at least one uppercase, one lowercase, one number, and one special character (` ~ ! @ # $ % ^ & * ( ) _ + - = { } | [ ]  : " ; ' +
+        "< > ? , . /)"
+    );
   }
 }
 
@@ -72,9 +106,11 @@ function getFieldName(input) {
 // Event listeners
 form.addEventListener("submit", function (e) {
   e.preventDefault();
-  checkRequired([username, email, password, password2]);
+  checkRequired([username, age, email, password, password2]);
   checkLength(username, 3, 15);
-  checkLength(password, 6, 25);
+  checkLength(password, 8, 25);
   checkEmail(email);
   checkPasswordsMatch(password, password2);
+  checkAge(age);
+  checkPassword(password);
 });
