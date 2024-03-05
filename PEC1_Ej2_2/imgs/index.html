@@ -6,11 +6,13 @@
     <title>Exchange Rate Calculator</title>
     <link rel="stylesheet" href="style.css" />
   </head>
+  <!-- TODO: Revisar accesibilidad del código -->
   <body>
     <img src="img/money.png" alt="money-img" />
     <h1>Exchange Rate Calculator</h1>
     <p>Choose the currency and the amounts to get the exchange rate</p>
 
+    <div class="loader"></div>
     <div class="container">
       <div class="currency">
         <select id="currency-one">
@@ -67,7 +69,14 @@
           <option value="VND">VND</option>
           <option value="ZAR">ZAR</option>
         </select>
-        <input type="number" id="amount-one" placeholder="0" value="1" />
+        <input
+          type="number"
+          id="amount-one"
+          min="1"
+          placeholder="0"
+          value="1"
+        />
+        <div class="error hidden">Amount must be a positive number</div>
       </div>
 
       <div class="swap-rate-container">
@@ -131,6 +140,7 @@
           <option value="ZAR">ZAR</option>
         </select>
         <input type="number" id="amount-two" placeholder="0" />
+        <div class="error hidden">Amount must be a positive number</div>
       </div>
     </div>
     <script src="script.js"></script>
