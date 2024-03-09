@@ -2,10 +2,10 @@ const container = document.querySelector(".container");
 const seats = document.querySelectorAll(".row .seat:not(.occupied)");
 const count = document.getElementById("count");
 const total = document.getElementById("total");
+const newCurrency = document.getElementById("cur");
 const movieSelect = document.getElementById("movie");
 const currencySelect = document.getElementById("currency");
-const currencyOne = document.getElementById("currency").value;
-// const movieCurrency = document.querySelectorAll("#movie option");
+let currencyOne = document.getElementById("currency").value;
 
 const films = [
   { title: "Avengers Endgame", price: "10", currency: "USD" },
@@ -35,6 +35,7 @@ function updateSelectedCount() {
   const selectedSeatsCount = selectedSeats.length;
   count.innerText = selectedSeatsCount;
   total.innerText = selectedSeatsCount * ticketPrice;
+  newCurrency.innerText = currencyOne;
 }
 
 //  Get data from local storage and populate UI
@@ -58,13 +59,7 @@ function populateUI() {
 
 // Calculate Currency
 function calculateCurrency(event) {
-  //const currencyTwo = document.getElementById("currency").value;
-
   if (event) {
-    // CurrencyOne === USD
-    // CurrencyTwo === Moneda elegida (ej. EUR)
-    // Event.target.value === USD (o moneda que sea)
-    // Ticket price = precio en USD
     const currencyTwo = event.target.value;
     fetch(
       `https://v6.exchangerate-api.com/v6/5759c061bafab526b0435aa0/latest/${currencyOne}`
@@ -78,20 +73,22 @@ function calculateCurrency(event) {
 
       .then((data) => {
         const rate = data.conversion_rates[currencyTwo];
-        // Actualizar todos los precios
-        // ticketPrice = (rate * ticketPrice).toFixed(2);
-        // console.log(ticketPrice);
-        // console.log(movieSelect);
 
         // To change Option films price and currency
         for (let i = 0; i < films.length; i++) {
-          console.log(i);
-          movieSelect.options[i].textContent = `${films[i].title} (${(
-            films[i].price * rate
-          ).toFixed(2)} ${currencyTwo})`;
+          films[i].price = (films[i].price * rate).toFixed(2);
+          films[i].currency = currencyTwo;
+          movieSelect.options[
+            i
+          ].textContent = `${films[i].title} (${films[i].price} ${currencyTwo})`;
+          movieSelect.options[i].value = films[i].price;
         }
+        currencyOne = currencyTwo;
+        ticketPrice = +movieSelect.value;
+        updateSelectedCount();
+
+        console.log(films);
       });
-    console.log(event.target.value);
   }
 }
 

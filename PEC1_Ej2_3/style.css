@@ -110,6 +110,6 @@ p.text {
   margin: 5px 0;
 }
 
-p.text span {
+p.text span:not([id="cur"]) {
   color: #6feaf6;
 }
