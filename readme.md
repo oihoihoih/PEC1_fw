@@ -19,4 +19,8 @@ Después de haber seguido el vídeo e implementado el formulario siguiendo el v�
 
 Además de esto, también he completado la etiqueta input con el atributo name.
 
--minlength de username cambiado a 2
+Lo siguiente que he querido hacer es activar el feedback al pasar de un input a otro, ya que creo que la experiencia de usuario es más positiva.
+
+Al intentar implementarlo, me he dado cuenta de que con el método de validación que daba el vídeo, tendría que ir especificando la validación a implementar en cada input, por lo que he decidido cambiar el enfoque, de esta manera, se utiliza la validación proporcionada en html para crear un objeto validationOptions que valida mediante el uso de los atributos del elemento input.
+
+Fuente: https://youtu.be/iyngFd6f8ko?feature=shared

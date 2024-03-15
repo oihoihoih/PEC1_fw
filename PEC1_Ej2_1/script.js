@@ -93,9 +93,6 @@ const validateForm = (formSelector) => {
     const label = formGroup.querySelector("label");
     const input = formGroup.querySelector("input, textarea");
     const errorContainer = formGroup.querySelector(".error");
-    // TODO: Valorar si añado estos iconos
-    const errorIcon = formGroup.querySelector(".error-icon");
-    const successIcon = formGroup.querySelector(".success-icon");
 
     let formGroupError = false;
 
@@ -119,7 +116,6 @@ const validateForm = (formSelector) => {
 
   Array.from(formElement.elements).forEach((element) => {
     element.addEventListener("blur", (event) => {
-      console.log(event.srcElement.parentElement.parentElement);
       validateSingleFormGroup(event.srcElement.parentElement);
     });
   });
