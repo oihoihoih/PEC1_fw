@@ -86,8 +86,6 @@ function calculateCurrency(event) {
         currencyOne = currencyTwo;
         ticketPrice = +movieSelect.value;
         updateSelectedCount();
-
-        console.log(films);
       });
   }
 }
@@ -96,7 +94,6 @@ function calculateCurrency(event) {
 // Movie select event
 movieSelect.addEventListener("change", (e) => {
   ticketPrice = +e.target.value;
-  console.log(ticketPrice);
   updateSelectedCount();
   setMovieData(e.target.selectedIndex, e.target.value);
 });

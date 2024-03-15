@@ -40,3 +40,7 @@ En el CSS:
 - He aumentado el tamaño de la tipografía al texto con clase "rate" por ser un texto con un color con un contraste bajo. Reconozco que lo ideal sería cambiar el color para aumentar el contraste, pero no lo he hecho debido a que cambiaría mucho el estilo, y me gusta cómo queda visualmente.
 - He cambiado las unidades de medida a unidades relativas (rem, %)
 - Reducir redundancias en el código
+
+### PEC1_EJ2_3
+
+En este ejercicio, para poder implementar el cambio de moneda y que al desplegar el Select se viesen todas las películas con la moneda seleccionada, he creado un array de objetos llamado films donde cada objeto tiene un título, un precio y una moneda y es a partir de este objeto que se harán todos los cálculos. Esto permitiría poder añadir o eliminar fácilmente nuevas películas, o actualizar tanto precios como monedas.
