@@ -74,7 +74,7 @@ Es un tipo de compilador que traduce un lenguaje fuente a otro lenguaje fuente. 
 
 ### • Cita y explica al menos 3 comandos de Git.
 
-- **git init** Sirve para crear un nuevo repositorio o reinicializar uno ya existente. Al ejecutar el comando, se creará una carpeta (invisible en mac) .git en el lugar que hayamos apuntado en la terminal.
+- **git init** Sirve para crear un nuevo repositorio o reinicializar uno ya existente en el directorio actual. Al ejecutar el comando, se creará una carpeta (invisible en mac) .git en el lugar que hayamos apuntado en la terminal.
 - **git status** Muestra el estado actual del _working directory_ y del _staging area_ permitiendo ver si hay archivos modificados en el _working directory_ que puedan añadirse al _staging area_ o si hay archivos en el _staging area_ que puedan ser commiteados.
 - **git add** Con este comando git prepara los archivos con cambios para almacenarlos en el _staging area_
 
