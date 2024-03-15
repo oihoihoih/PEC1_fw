@@ -1,3 +1,4 @@
+/* TODO: Dar estilo al párrafo con información de required */
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
 :root {
@@ -17,6 +18,10 @@ body {
   justify-content: center;
   min-height: 100vh;
   margin: 0;
+}
+
+abbr {
+  text-decoration: none;
 }
 
 .container {
@@ -60,24 +65,16 @@ h2 {
   border-color: #777;
 }
 
-.form-control.success input {
+.form-control input.success {
   border-color: var(--success-color);
 }
 
-.form-control.error input {
+.form-control input.error-border {
   border-color: var(--error-color);
 }
 
 .form-control small {
   color: var(--error-color);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  visibility: hidden;
-}
-
-.form-control.error small {
-  visibility: visible;
   position: relative;
 }
 

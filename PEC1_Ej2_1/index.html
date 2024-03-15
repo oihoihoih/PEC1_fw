@@ -7,41 +7,85 @@
     <title>PEC1 Exercise 2 - Form Validator</title>
   </head>
   <body>
-    <div class="container">
-      <form id="form" class="form">
+    <main class="container">
+      <form
+        id="form"
+        class="form"
+        aria-label="Contact information to Register whith us"
+      >
         <h2>Register with us</h2>
+        <p class="required">The fields marked with * are mandatory</p>
         <div class="form-control">
-          <label for="username">Username</label>
-          <input type="text" id="username" placeholder="Enter username" />
-          <small>Error message</small>
-        </div>
-        <div class="form-control">
-          <label for="age">Age</label>
-          <input type="number" id="age" placeholder="Enter your age" />
-          <small>Error message</small>
-        </div>
-        <div class="form-control">
-          <label for="email">Email</label>
-          <input type="text" id="email" placeholder="Enter email" />
-          <small>Error message</small>
-        </div>
-        <div class="form-control">
-          <label for="password">Password</label>
-          <input type="password" id="password" placeholder="Enter password" />
-          <small>Error message</small>
-        </div>
-        <div class="form-control">
-          <label for="password2">Confirm Password</label>
+          <label for="username"
+            >Username <abbr title="obligatorio">*</abbr></label
+          >
           <input
+            required
+            minlength="2"
+            custommaxlength="15"
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Enter username"
+            autofocus
+          />
+          <small class="error"></small>
+        </div>
+        <div class="form-control">
+          <label for="age">Age <abbr title="required">*</abbr></label>
+          <input
+            required
+            min="0"
+            max="1000"
+            type="number"
+            name="age"
+            id="age"
+            placeholder="Enter your age"
+          />
+          <small class="error"></small>
+        </div>
+        <div class="form-control">
+          <label for="email">Email <abbr title="required">*</abbr></label>
+          <input
+            required
+            pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Enter email"
+          />
+          <small class="error"></small>
+        </div>
+        <div class="form-control">
+          <label for="password">Password <abbr title="required">*</abbr></label>
+          <input
+            required
+            minlength="8"
+            pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[`~!@#$%^&*\(\)_+\-=\{\}\|\[\]\\\:'&quot;;<>?,.\/])"
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Enter password"
+          />
+          <small class="error"></small>
+        </div>
+        <div class="form-control">
+          <label for="password2"
+            >Confirm Password <abbr title="required">*</abbr></label
+          >
+          <input
+            required
+            match="password"
+            minlength="8"
             type="password"
             id="password2"
             placeholder="Enter password again"
           />
-          <small>Error message</small>
+          <small class="error"></small>
         </div>
         <button>Submit</button>
       </form>
-    </div>
+    </main>
     <script src="script.js"></script>
   </body>
 </html>

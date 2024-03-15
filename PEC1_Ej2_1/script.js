@@ -1,116 +1,143 @@
-const form = document.getElementById("form");
-const username = document.getElementById("username");
-const age = document.getElementById("age");
-const email = document.getElementById("email");
-const password = document.getElementById("password");
-const password2 = document.getElementById("password2");
+const validateForm = (formSelector) => {
+  const formElement = document.querySelector(formSelector);
+  const validationOptions = [
+    {
+      attribute: "pattern",
+      isValid: (input) => {
+        const patternRegex = new RegExp(input.pattern);
+        return patternRegex.test(input.value);
+      },
+      errorMessage: (input, label) =>
+        `Not a valid ${label.textContent.substring(
+          0,
+          label.textContent.length - 1
+        )}, it must contain at least one uppercase letter, one lowercase letter, one digit, and one of these symbols: ${"`"} ~ ! @ # $ % ^ & * ( ) _ + - = { } | [ ] \ : " ; ' < > ? , . /`,
+    },
+    {
+      attribute: "minlength",
+      isValid: (input) =>
+        input.value && input.value.length >= parseInt(input.minLength, 10),
+      errorMessage: (input, label) =>
+        `${label.textContent.substring(
+          0,
+          label.textContent.length - 1
+        )} needs to be at least ${input.minLength} characters`,
+    },
+    {
+      attribute: "custommaxlength",
+      isValid: (input) =>
+        input.value &&
+        input.value.length <=
+          parseInt(input.getAttribute("custommaxlength"), 10),
+      errorMessage: (input, label) =>
+        `${label.textContent.substring(
+          0,
+          label.textContent.length - 1
+        )} needs to be less than ${input.getAttribute(
+          "custommaxlength"
+        )} characters`,
+    },
+    {
+      attribute: "match",
+      isValid: (input) => {
+        const matchSelector = input.getAttribute("match");
+        const matchedElement = form.querySelector(`#${matchSelector}`);
+        return (
+          matchedElement && matchedElement.value.trim() === input.value.trim()
+        );
+      },
+      errorMessage: (input, label) => {
+        const matchSelector = input.getAttribute("match");
+        const matchedElement = form.querySelector(`#${matchSelector}`);
+        const matchedLabel =
+          matchedElement.parentElement.querySelector("label");
+        return `${label.textContent.substring(
+          0,
+          label.textContent.length - 1
+        )} should match ${matchedLabel.textContent.substring(
+          0,
+          matchedLabel.textContent.length - 1
+        )}`;
+      },
+    },
+    {
+      attribute: "min",
+      isValid: (input) => input.value && +input.value >= +input.min,
+      errorMessage: (input, label) =>
+        `${label.textContent.substring(
+          0,
+          label.textContent.length - 1
+        )} value needs to be bigger than ${input.min}`,
+    },
+    {
+      attribute: "max",
+      isValid: (input) => input.value && +input.value <= +input.max,
+      errorMessage: (input, label) =>
+        `${label.textContent.substring(
+          0,
+          label.textContent.length - 1
+        )} value needs to be less than ${input.max}`,
+    },
+    {
+      attribute: "required",
+      isValid: (input) => input.value.trim() !== "",
+      errorMessage: (input, label) =>
+        `${label.textContent.substring(
+          0,
+          label.textContent.length - 1
+        )} is required`,
+    },
+  ];
 
-// Show error message
-function showError(input, message) {
-  const formControl = input.parentElement;
-  formControl.className = "form-control error";
-  const small = formControl.querySelector("small");
-  small.innerText = message;
-}
+  const validateSingleFormGroup = (formGroup) => {
+    const label = formGroup.querySelector("label");
+    const input = formGroup.querySelector("input, textarea");
+    const errorContainer = formGroup.querySelector(".error");
+    // TODO: Valorar si añado estos iconos
+    const errorIcon = formGroup.querySelector(".error-icon");
+    const successIcon = formGroup.querySelector(".success-icon");
 
-// Show success outline
-function showSuccess(input) {
-  const formControl = input.parentElement;
-  formControl.className = "form-control success";
-}
+    let formGroupError = false;
 
-// Check email is valid
-function checkEmail(input) {
-  const re =
-    /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-  if (re.test(input.value.trim())) {
-    showSuccess(input);
-  } else {
-    showError(input, `Email is not valid`);
-  }
-}
+    for (const option of validationOptions) {
+      if (input.hasAttribute(option.attribute) && !option.isValid(input)) {
+        input.classList.add("error-border");
+        input.classList.remove("success");
+        errorContainer.textContent = option.errorMessage(input, label);
+        formGroupError = true;
+      }
 
-// Check age is valid
-function checkAge(input) {
-  if (input.value < 0 || input.value > 1000) {
-    showError(input, "Age must be between 0 and 1000 years");
-  }
-}
-
-// TODO: Validaciones en tiempo real
-// TODO: Posicionamiento de la frase del password
-// Check password is valid
-function checkPassword(input) {
-  const capitalLetter = /[A-Z]/;
-  const lowerCase = /[a-z]/;
-  const numbers = /\d/;
-  const signs = /[`~!@#$%^&*()_+\-=\{\}\|\[\]\\:";'<>?,./]/;
-
-  if (
-    capitalLetter.test(input.value) &&
-    lowerCase.test(input.value) &&
-    numbers.test(input.value) &&
-    signs.test(input.value)
-  ) {
-    console.log(input.value.test(capitalLetter));
-    showSuccess(input);
-  } else {
-    showError(
-      input,
-      'The password must have at least one uppercase, one lowercase, one number, and one special character (` ~ ! @ # $ % ^ & * ( ) _ + - = { } | [ ]  : " ; ' +
-        "< > ? , . /)"
-    );
-  }
-}
-
-// Check required fields
-function checkRequired(inputArr) {
-  inputArr.forEach(function (input) {
-    if (input.value.trim() === "") {
-      showError(input, `${getFieldName(input)} is required`);
-    } else {
-      showSuccess(input);
+      if (!formGroupError) {
+        errorContainer.textContent = "";
+        input.classList.remove("error-border");
+        input.classList.add("success");
+      }
     }
+  };
+
+  formElement.setAttribute("noValidate", "");
+
+  Array.from(formElement.elements).forEach((element) => {
+    element.addEventListener("blur", (event) => {
+      console.log(event.srcElement.parentElement.parentElement);
+      validateSingleFormGroup(event.srcElement.parentElement);
+    });
   });
-}
 
-// Check input length
-function checkLength(input, min, max) {
-  if (input.value.length < min) {
-    showError(
-      input,
-      `${getFieldName(input)} must be at least ${min} characters`
+  formElement.addEventListener("submit", (event) => {
+    event.preventDefault();
+    validateAllFormGroups(formElement);
+  });
+
+  const validateAllFormGroups = (formToValidate) => {
+    const formGroups = Array.from(
+      formToValidate.querySelectorAll(".form-control")
     );
-  } else if (input.value.length > max) {
-    showError(
-      input,
-      `${getFieldName(input)} must be less than ${max} characters`
-    );
-  } else {
-    showSuccess(input);
-  }
-}
 
-// Check passwords match
-function checkPasswordsMatch(input1, input2) {
-  if (input1.value !== input2.value) {
-    showError(input2, "Passwords do not match");
-  }
-}
+    formGroups.forEach((formGroup) => {
+      validateSingleFormGroup(formGroup);
+    });
+  };
+};
 
-// Get FieldName
-function getFieldName(input) {
-  return input.id.charAt(0).toUpperCase() + input.id.slice(1);
-}
-
-// Event listeners
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
-  checkRequired([username, age, email, password, password2]);
-  checkLength(username, 3, 15);
-  checkLength(password, 8, 25);
-  checkEmail(email);
-  checkPasswordsMatch(password, password2);
-  checkAge(age);
-  checkPassword(password);
-});
+validateForm("#form");
